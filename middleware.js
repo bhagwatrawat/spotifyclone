@@ -10,10 +10,10 @@ export async function middleware(req) {
     if(pathname.includes('/api/auth') || token){
         return NextResponse.next();
     }
+    console.log(req.nextUrl)
     if(!token && pathname!=='/login' && !pathname.includes('_next')){
-         return NextResponse.redirect(new URL('/login',req.nextUrl));
+         return NextResponse.redirect(new URL('/login',process.env.NEXTAUTH_URL));
     }
 }
 // export const config = {
 //     matcher: '/api/:path*',
-//   }
