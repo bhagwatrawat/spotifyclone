@@ -22,11 +22,8 @@ function Sidebar() {
   console.log(playlistId)
   return (
     <div>
-      <div className="text-gray-500 p-5 border-r border-gray-900 space-y-4  overflow-y-scroll h-screen">
-        <button onClick={()=>signOut()} className="flex space-x-2 items-center hover:text-white">
-          <HomeIcon className="h- w-5" />
-          <p>Log out</p>
-        </button>
+      <div className="text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 space-y-4  overflow-y-scroll h-screen 
+       sm:max-w-[12rem] lg:max-w-[15rem] pb-36">
         <button className="flex space-x-2 items-center hover:text-white">
           <HomeIcon className="h- w-5" />
           <p>Home</p>

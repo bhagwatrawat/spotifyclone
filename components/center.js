@@ -5,6 +5,8 @@ import {shuffle} from 'lodash'
 import { useRecoilState } from 'recoil';
 import { playlistIdState,playlistState } from '../atoms/playlistAtom';
 import useSpotify from '../hooks/useSpotify';
+import Songs from './songs';
+import { signOut } from 'next-auth/react';
 const colors=[
   "from-blue-500",
   "from-blue-600",
@@ -30,6 +32,7 @@ function Center() {
     },[playlistId])
 
     useEffect(()=>{
+        
         spotifyApi.getPlaylist(playlistId).then(res=>{
           setPlaylist(res.body);
         })
@@ -39,9 +42,9 @@ function Center() {
     },[spotifyApi,playlistId])
     console.log(playlist)
   return (
-    <div className=" flex-grow text-white ">
+    <div className=" flex-grow text-white h-screen overflow-y-scroll">
         <header className="absolute top-2 right-8 bg-black text-white rounded-full">
-            <div className="flex items-center   space-x-6 opacity-90 hover:opacity-80 cursor-pointer p-1 pr-2">
+            <div onClick={()=>signOut()} className="flex items-center   space-x-6 opacity-90 hover:opacity-80 cursor-pointer p-1 pr-2">
                 <img  className="h-8 w-8 rounded-full"src={session?.user.image}/>
                 <h2>{session?.user.name}</h2>
                 <ChevronDownIcon className="h-5 w-5" />
@@ -54,6 +57,7 @@ function Center() {
             <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">{playlist?.name}</h1>
           </div>
         </section>
+        <Songs/>
     </div>
   )
 }
